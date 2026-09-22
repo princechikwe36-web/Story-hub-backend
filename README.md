@@ -1,13 +1,27 @@
-# Storyhub Backend
-A starter backend for Storyhub using Node.js, Express and SQLite.
+# Story Hub Full Stack
 
-## Included
-Stories, chapters, manga pages, bookmarks, favorites, reviews, complaints and analytics.
+## Folder structure
+- `frontend/index.html` — Story Hub website UI.
+- `backend/src/server.js` — Express + SQLite API.
+- `backend/package.json` — backend dependencies.
 
-## Run
-1. Install Node.js.
-2. In this folder run `npm install`.
-3. Run `npm start`.
-4. API: `http://localhost:3000`
+## Run locally
+1. Install Node.js 18+.
+2. Open a terminal in `backend`.
+3. Run `npm install`.
+4. Run `npm start`.
+5. Open `frontend/index.html` in a browser.
+6. If the backend is not at `http://localhost:3000`, set:
+   `localStorage.setItem("storyhub_api","https://YOUR-BACKEND/api")`
+   before loading the page.
 
-This is a backend project ready to connect to the Storyhub frontend. For a public production deployment, move the database to a hosted database and add real authentication/file storage.
+## Accounts
+- Normal sign-up creates a reader account.
+- Author/admin creation is intentionally protected by the server.
+- To make an existing account the owner/admin, set `ADMIN_BOOTSTRAP_SECRET` on the server, then POST:
+  `/api/admin/bootstrap`
+  with `{ "email":"owner@example.com", "secret":"your-secret" }`.
+- Never put the admin secret in the frontend.
+
+## Important production steps
+Use HTTPS, a strong JWT secret, a real managed database/backups, object storage for uploaded images, secure admin authentication, and an approved ad provider. The demo ad event is not an ad network and must not be treated as real advertising revenue.
